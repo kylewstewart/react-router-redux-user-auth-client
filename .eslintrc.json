@@ -1,3 +1,16 @@
 {
-    "extends": "airbnb"
+  "extends": "airbnb",
+   "parser": "babel-eslint",
+   "ecmaFeatures": {
+     "classes": true
+   },
+   "rules": {
+     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+     "global-require": "off"
+   },
+   "globals": {
+     "fetch": false,
+     "dispatch": false,
+     "document": false
+   }
 }
