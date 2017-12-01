@@ -1,3 +1,7 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({});
+import Route from './RouteReducer';
+
+export default combineReducers({
+  Route,
+});
