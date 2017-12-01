@@ -11,7 +11,10 @@ class LogInContainer extends Component {
 
   handleChange= (e, { name, value }) => this.setState({ [name]: value });
 
-  handleClick = () => adaptors.auth(this.state.username, this.state.password);
+  handleClick = () => {
+    adaptors.auth(this.state.username, this.state.password)
+      .then(response => console.log(response));
+  };
 
   render() {
     return (
