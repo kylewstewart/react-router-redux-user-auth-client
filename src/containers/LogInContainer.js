@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 
+import * as adaptors from '../adaptors';
+
 class LogInContainer extends Component {
   state = {
     username: '',
@@ -9,7 +11,7 @@ class LogInContainer extends Component {
 
   handleChange= (e, { name, value }) => this.setState({ [name]: value });
 
-  handleClick = () => console.log('submited');
+  handleClick = () => adaptors.auth(this.state.username, this.state.password);
 
   render() {
     return (
