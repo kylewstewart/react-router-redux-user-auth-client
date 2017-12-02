@@ -1,6 +1,12 @@
 import React from 'react';
-import { Header } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 
-const HomeContainer = () => <Header contents="Welcome to Your App" />;
+import withAuth from '../HOCs/withAuth';
 
-export default HomeContainer;
+const HomeContainer = () => (
+  <Container>
+    <Header content="Welcome to the good stuff!" />
+  </Container>
+);
+
+export default withAuth(HomeContainer);

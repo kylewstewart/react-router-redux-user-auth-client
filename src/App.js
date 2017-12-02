@@ -1,17 +1,15 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
-import Home from './containers/HomeContainer';
-import LogIn from './containers/LogInContainer';
-import withAuth from './HOCs/withAuth';
+import Main from './Main';
+import Header from './containers/HeaderContainer';
 
 
 const App = () => (
   <Container>
-    <Route path="/home" component={Home} />
-    <Route path="/login" component={LogIn} />
+    <Header />
+    <Main />
   </Container>
 );
 
-export default withAuth(App);
+export default App;
