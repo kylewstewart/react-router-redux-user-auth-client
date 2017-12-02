@@ -42,4 +42,6 @@ class LogInContainer extends Component {
   }
 }
 
-export default LogInContainer;
+const mapStateToProps = state => ({ state });
+
+export default connect(mapStateToProps)(LogInContainer);
