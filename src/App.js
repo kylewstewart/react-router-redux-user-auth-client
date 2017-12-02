@@ -1,16 +1,17 @@
 import React from 'react';
-import { Header, Container } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
 
+import HomeContainer from './containers/HomeContainer';
 import LogInContainer from './containers/LogInContainer';
+import withAuth from './HOCs/withAuth';
+
 
 const App = () => (
   <Container>
-    <Header content="Welcome to 0x Auction" />
-    <LogInContainer />
+    <Route path="/home" component={HomeContainer} />
+    <Route path="/login" component={LogInContainer} />
   </Container>
 );
 
-const mapStateToProp = state => ({ state });
-
-export default connect(mapStateToProp)(App);
+export default withAuth(App);

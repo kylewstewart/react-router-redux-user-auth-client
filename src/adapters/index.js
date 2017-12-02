@@ -1,22 +1,21 @@
 const baseURL = 'http://localhost:3000/api/v1';
 
+const headers = () => ({
+  'content-type': 'application/json',
+  accept: 'application/json',
+  Authorization: localStorage.getItem('token'),
+});
+
 export const auth = (username, password) => (
   fetch(`${baseURL}/auth`, {
     method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
+    headers: headers(),
     body: JSON.stringify({ username, password }),
   }).then(response => response.json())
 );
 
-export const currentUser = token => (
+export const currentUser = () => (
   fetch(`${baseURL}/current_user`, {
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      Authorization: `${token}`,
-    },
+    headers: headers(),
   }).then(response => response.json())
 );

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-import * as adaptors from '../adaptors';
+
+import * as adapters from '../adapters';
 
 class LogInContainer extends Component {
   state = {
@@ -12,7 +14,7 @@ class LogInContainer extends Component {
   handleChange= (e, { name, value }) => this.setState({ [name]: value });
 
   handleClick = () => {
-    adaptors.auth(this.state.username, this.state.password)
+    adapters.auth(this.state.username, this.state.password)
       .then(response => console.log(response));
   };
 
