@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import * as Adapters from '../adapters';
+import * as adapters from '../adapters';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -15,7 +15,7 @@ export default function withAuth(WrappedComponent) {
       if (!localStorage.getItem('token')) {
         this.props.history.push('/login');
       } else {
-        const user = await Adapters.currentUser();
+        const user = await adapters.currentUser();
         if (user.error) this.props.history.push('/login');
       }
     };

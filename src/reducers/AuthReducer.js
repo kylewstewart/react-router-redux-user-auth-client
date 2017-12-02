@@ -1,11 +1,12 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../actions/types';
 
-const intialState = {
+const initialState = {
   isFetching: false,
   isAuth: !!localStorage.getItem('token'),
+  errorMessage: '',
 };
 
-export default (state = intialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -24,6 +25,7 @@ export default (state = intialState, action) => {
         ...state,
         isFetching: false,
         isAuth: false,
+        errorMessage: action.message,
       };
     case LOGOUT_SUCCESS:
       return {
