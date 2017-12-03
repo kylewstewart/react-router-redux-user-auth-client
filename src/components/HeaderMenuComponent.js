@@ -17,13 +17,11 @@ const propTypes = {
 class HeaderMenuComponent extends Component {
   state = { activeItem: 'home' };
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.isAuth === true) {
-  //     this.setState({ activeItem: 'home' });
-  //   } else {
-  //     this.setState({ activeItem: 'log in' });
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isAuth !== this.props.isAuth) {
+      this.setState({ activeItem: 'home' });
+    }
+  }
 
   handleLogOut = () => {
     this.props.logOut();
