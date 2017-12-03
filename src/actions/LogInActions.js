@@ -18,3 +18,8 @@ export const logOut = () => async (dispatch) => {
   dispatch({ type: types.CLEAR_USER });
   dispatch({ type: types.LOGOUT_SUCCESS });
 };
+
+export const authorized = user => (dispatch) => {
+  dispatch({ type: types.SET_USER, username: user.username, id: user.id });
+  dispatch({ type: types.LOGIN_SUCCESS });
+};

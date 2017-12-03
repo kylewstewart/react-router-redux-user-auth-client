@@ -2,7 +2,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../
 
 const initialState = {
   isFetching: false,
-  isAuth: !!localStorage.getItem('token'),
+  isAuth: false,
   message: '',
 };
 
