@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { logIn } from '../actions';
 
 const propTypes = {
   logIn: PropTypes.func.isRequired,
-  isAuth: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 class LogInContainer extends Component {
@@ -17,7 +21,10 @@ class LogInContainer extends Component {
 
   handleChange= (e, { name, value }) => this.setState({ [name]: value });
 
-  handleClick = () => this.props.logIn(this.state.username, this.state.password);
+  handleClick = async () => {
+    await this.props.logIn(this.state.username, this.state.password);
+    this.props.history.push('/');
+  };
 
   render() {
     return (
@@ -36,6 +43,7 @@ class LogInContainer extends Component {
         />
         <Form.Button
           content="Submit"
+          loading={!!this.props.isFetching}
           onClick={this.handleClick}
         />
       </Form>
@@ -52,4 +60,4 @@ const mapStateToProps = ({ auth }) => (
   }
 );
 
-export default connect(mapStateToProps, { logIn })(LogInContainer);
+export default withRouter(connect(mapStateToProps, { logIn })(LogInContainer));

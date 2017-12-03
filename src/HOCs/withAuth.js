@@ -16,7 +16,11 @@ export default function withAuth(WrappedComponent) {
         this.props.history.push('/login');
       } else {
         const user = await adapters.currentUser();
-        if (user.error) this.props.history.push('/login');
+        if (user.error) {
+          this.props.history.push('/login');
+        } else {
+          this.props.history.push('/home');
+        }
       }
     };
 
