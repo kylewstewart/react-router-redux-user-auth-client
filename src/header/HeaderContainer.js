@@ -24,7 +24,7 @@ const HeaderContainer = ({ isAuth, username }) => (
           <Header
             as="h4"
             floated="right"
-            content={!isAuth ? null : username}
+            content={!isAuth ? null : `User: ${username}`}
           />
         </Grid.Column>
       </Grid.Row>

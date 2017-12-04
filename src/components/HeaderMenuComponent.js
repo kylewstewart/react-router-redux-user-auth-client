@@ -47,15 +47,17 @@ class HeaderMenuComponent extends Component {
 
     return (
       <Menu secondary>
-        {pages.map(page => (
-          <Menu.Item
-            key={page.key}
-            name={page.name}
-            path={page.path}
-            active={isAuth && activeItem === page.name}
-            onClick={this.handleClick}
-          />
-        ))}
+        <Menu.Menu position="left">
+          {pages.map(page => (
+            <Menu.Item
+              key={page.key}
+              name={page.name}
+              path={page.path}
+              active={isAuth && activeItem === page.name}
+              onClick={this.handleClick}
+            />
+          ))}
+        </Menu.Menu>
         <Menu.Menu position="right">
           {
             !isAuth ?

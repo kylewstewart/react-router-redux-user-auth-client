@@ -54,7 +54,6 @@ class NewUserContainer extends Component {
           <Form.Button
             content="Submit"
             loading={!!this.props.isFetching}
-            onClick={this.handleClick}
           />
         </Form>
         <Header
