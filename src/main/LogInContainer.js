@@ -41,6 +41,7 @@ class LogInContainer extends Component {
           <Form.Input
             label="Password"
             name="password"
+            type="password"
             value={this.state.password}
             onChange={this.handleChange}
           />

@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Menu } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-
-import { logOut } from '../actions';
+import {
+  logOut,
+  setActiveItem,
+} from '../actions';
 import LogIn from './HeaderMenuLogInComponent';
 
 const propTypes = {
@@ -13,6 +15,8 @@ const propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  setActiveItem: PropTypes.func.isRequired,
+  activeItem: PropTypes.string.isRequired,
 };
 
 const pages = [
@@ -23,10 +27,8 @@ const pages = [
 ];
 
 class HeaderMenuComponent extends Component {
-  state = { activeItem: 'home' };
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isAuth !== this.props.isAuth) this.setState({ activeItem: 'home' });
+    if (nextProps.isAuth !== this.props.isAuth) this.props.setActiveItem('home');
   }
 
   handleLogOut = () => {
@@ -36,14 +38,13 @@ class HeaderMenuComponent extends Component {
 
   handleClick = (e, { name, path }) => {
     if (this.props.isAuth) {
-      this.setState({ activeItem: name });
+      this.props.setActiveItem(name);
       this.props.history.push(path);
     }
   }
 
   render() {
-    const { activeItem } = this.state;
-    const { isAuth } = this.props;
+    const { isAuth, activeItem } = this.props;
 
     return (
       <Menu secondary>
@@ -75,6 +76,9 @@ class HeaderMenuComponent extends Component {
 
 HeaderMenuComponent.propTypes = propTypes;
 
-const mapStateToProps = ({ auth }) => ({ isAuth: auth.isAuth });
+const mapStateToProps = ({ auth, activeItem }) => ({ isAuth: auth.isAuth, activeItem });
 
-export default withRouter(connect(mapStateToProps, { logOut })(HeaderMenuComponent));
+export default withRouter(connect(mapStateToProps, {
+  logOut,
+  setActiveItem,
+})(HeaderMenuComponent));

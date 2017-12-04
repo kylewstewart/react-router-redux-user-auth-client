@@ -64,12 +64,14 @@ class NewUserContainer extends Component {
           <Form.Input
             label="Password"
             name="password"
+            type="password"
             value={this.state.password}
             onChange={this.handleChange}
           />
           <Form.Input
             label="Confirm Password"
             name="confirmPassword"
+            type="password"
             value={this.state.confirmPassword}
             onChange={this.handleChange}
           />
