@@ -47,31 +47,3 @@ const mapStateToProps = state => (
 );
 
 export default connect(mapStateToProps, { logOut })(HeaderContainer);
-
-
-// return (
-//   <Container>
-//     <Grid columns={2}>
-//       <Grid.Row>
-//         <Grid.Column floated="left" width={5}>
-//           {
-//             !props.isAuth ?
-//               <Header content="Your App" /> :
-//               <Header content={props.username} />
-//           }
-//         </Grid.Column>
-//         <Grid.Column floated="right" width={5}>
-//           {
-//             !props.isAuth ?
-//             null :
-//             <Button
-//               basic
-//               content="Log Out"
-//               onClick={handleClick}
-//             />
-//           }
-//         </Grid.Column>
-//       </Grid.Row>
-//     </Grid>
-//   </Container>
-// );

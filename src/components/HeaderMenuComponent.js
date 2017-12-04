@@ -5,6 +5,7 @@ import { Menu } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 import { logOut } from '../actions';
+import LogIn from './HeaderMenuLogInComponent';
 
 const propTypes = {
   isAuth: PropTypes.bool.isRequired,
@@ -58,11 +59,7 @@ class HeaderMenuComponent extends Component {
         <Menu.Menu position="right">
           {
             !isAuth ?
-              <Menu.Item
-                name="log in"
-                active={!isAuth}
-
-              /> :
+              <LogIn /> :
               <Menu.Item
                 name="log out"
                 onClick={this.handleLogOut}
