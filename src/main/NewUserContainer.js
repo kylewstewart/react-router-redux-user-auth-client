@@ -3,12 +3,12 @@ import { Container, Form, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { logIn } from '../actions';
+import { createUser } from '../actions';
 
 const propTypes = {
-  logIn: PropTypes.func.isRequired,
+  createUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  isAuth: PropTypes.bool.isRequired,
+  isCreated: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -19,14 +19,18 @@ class NewUserContainer extends Component {
   state = {
     username: '',
     password: '',
-    verifyPassword: '',
+    confirmPassword: '',
   };
 
   handleChange= (e, { name, value }) => this.setState({ [name]: value });
 
   handleClick = async () => {
-    await this.props.logIn(this.state.username, this.state.password);
-    if (this.props.isAuth === true) this.props.history.push('/');
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password,
+    };
+    await this.props.createUser(newUser);
+    if (this.props.isCreated === true) this.props.history.push('/login');
   };
 
   render() {
@@ -46,14 +50,15 @@ class NewUserContainer extends Component {
             onChange={this.handleChange}
           />
           <Form.Input
-            label="Verify Password"
-            name="verifyPassword"
-            value={this.state.verifyPassword}
+            label="Confirm Password"
+            name="confirmPassword"
+            value={this.state.confirmPassword}
             onChange={this.handleChange}
           />
           <Form.Button
             content="Submit"
             loading={!!this.props.isFetching}
+            onClick={this.handleClick}
           />
         </Form>
         <Header
@@ -68,12 +73,12 @@ class NewUserContainer extends Component {
 
 NewUserContainer.propTypes = propTypes;
 
-const mapStateToProps = ({ auth }) => (
+const mapStateToProps = ({ newUser }) => (
   {
-    isAuth: auth.isAuth,
-    isFetching: auth.isFetching,
-    message: auth.message,
+    isCreated: newUser.isCreated,
+    isFetching: newUser.isFetching,
+    message: newUser.message,
   }
 );
 
-export default withRouter(connect(mapStateToProps, { logIn })(NewUserContainer));
+export default withRouter(connect(mapStateToProps, { createUser })(NewUserContainer));

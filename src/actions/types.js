@@ -8,4 +8,7 @@ export const LOGOUT_SUCCESS = 'logout_success';
 export const SET_USER = 'set_user';
 export const CLEAR_USER = 'clear_user';
 
-// Pages
+// CreateUser
+export const CREATE_REQUEST = 'create_request';
+export const CREATE_SUCCESS = 'create_success';
+export const CREATE_FAILURE = 'create_failure';

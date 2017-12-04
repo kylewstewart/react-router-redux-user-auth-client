@@ -23,3 +23,14 @@ export const authorized = user => (dispatch) => {
   dispatch({ type: types.SET_USER, username: user.username, id: user.id });
   dispatch({ type: types.LOGIN_SUCCESS });
 };
+
+export const createUser = newUser => async (dispatch) => {
+  dispatch({ type: types.CREATE_REQUEST });
+  const user = await adapters.createUser(newUser);
+  if (!user.error) {
+    dispatch({ type: types.SET_USER, username: user.username, id: user.id });
+    dispatch({ type: types.CREATE_SUCCESS });
+  } else {
+    dispatch({ type: types.CREATE_FAILURE, message: user.error });
+  }
+};

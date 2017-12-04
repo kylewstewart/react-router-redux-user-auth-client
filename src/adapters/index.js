@@ -19,3 +19,11 @@ export const currentUser = () => (
     headers: headers(),
   }).then(response => response.json())
 );
+
+export const createUser = newUser => (
+  fetch(`${baseURL}/user`, {
+    method: 'post',
+    headers: headers(),
+    body: JSON.stringify(newUser),
+  }).then(response => response.json())
+);
