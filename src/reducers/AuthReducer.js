@@ -1,4 +1,11 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../actions/types';
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT_SUCCESS,
+  ADD_LOGIN_MESSAGE,
+  CLEAR_LOGIN_MESSAGE,
+} from '../actions/types';
 
 const initialState = {
   isFetching: false,
@@ -30,6 +37,16 @@ export default (state = initialState, action) => {
       return {
         isFetching: false,
         isAuth: false,
+        message: '',
+      };
+    case ADD_LOGIN_MESSAGE:
+      return {
+        ...state,
+        message: action.message,
+      };
+    case CLEAR_LOGIN_MESSAGE:
+      return {
+        ...state,
         message: '',
       };
     default:

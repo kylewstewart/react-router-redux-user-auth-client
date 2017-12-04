@@ -24,6 +24,13 @@ export const authorized = user => (dispatch) => {
   dispatch({ type: types.LOGIN_SUCCESS });
 };
 
+export const addLogInMessage = message => (dispatch) => {
+  dispatch({ type: types.ADD_LOGIN_MESSAGE, message });
+};
+export const clearLogInMessage = () => (dispatch) => {
+  dispatch({ type: types.CLEAR_LOGIN_MESSAGE });
+};
+
 export const createUser = newUser => async (dispatch) => {
   dispatch({ type: types.CREATE_REQUEST });
   const user = await adapters.createUser(newUser);
@@ -33,4 +40,14 @@ export const createUser = newUser => async (dispatch) => {
   } else {
     dispatch({ type: types.CREATE_FAILURE, message: user.error });
   }
+};
+
+export const failedPasswordConfirm = () => (dispatch) => {
+  dispatch({ type: types.CREATE_FAILURE, message: 'Passwords Do Not Match' });
+};
+export const addNewUserMessage = message => (dispatch) => {
+  dispatch({ type: types.ADD_NEWUSER_MESSAGE, message });
+};
+export const clearNewUserMessage = () => (dispatch) => {
+  dispatch({ type: types.CLEAR_NEWUSER_MESSAGE });
 };

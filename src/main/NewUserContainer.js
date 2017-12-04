@@ -3,10 +3,17 @@ import { Container, Form, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { createUser } from '../actions';
+import {
+  createUser,
+  failedPasswordConfirm,
+  clearNewUserMessage,
+  
+
+} from '../actions';
 
 const propTypes = {
   createUser: PropTypes.func.isRequired,
+  failedPasswordConfirm: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isCreated: PropTypes.bool.isRequired,
   history: PropTypes.shape({
@@ -24,13 +31,15 @@ class NewUserContainer extends Component {
 
   handleChange= (e, { name, value }) => this.setState({ [name]: value });
 
-  handleClick = async () => {
-    const newUser = {
-      username: this.state.username,
-      password: this.state.password,
-    };
-    await this.props.createUser(newUser);
-    if (this.props.isCreated === true) this.props.history.push('/login');
+  handleClick = () => {
+    const { username, password, confirmPassword } = this.state;
+
+    if (password === confirmPassword) {
+      const newUser = { username, password };
+      this.props.createUser(newUser);
+    } else {
+      this.props.failedPasswordConfirm();
+    }
   };
 
   render() {
@@ -81,4 +90,9 @@ const mapStateToProps = ({ newUser }) => (
   }
 );
 
-export default withRouter(connect(mapStateToProps, { createUser })(NewUserContainer));
+export default withRouter(connect(mapStateToProps, {
+  createUser,
+  failedPasswordConfirm,
+  clearLogInMessage,
+  addNewUserMessage,
+})(NewUserContainer));

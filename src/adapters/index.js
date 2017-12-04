@@ -24,6 +24,6 @@ export const createUser = newUser => (
   fetch(`${baseURL}/user`, {
     method: 'post',
     headers: headers(),
-    body: JSON.stringify(newUser),
+    body: JSON.stringify({ newUser }),
   }).then(response => response.json())
 );

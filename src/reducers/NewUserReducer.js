@@ -1,4 +1,10 @@
-import { CREATE_REQUEST, CREATE_SUCCESS, CREATE_FAILURE } from '../actions/types';
+import {
+  CREATE_REQUEST,
+  CREATE_SUCCESS,
+  CREATE_FAILURE,
+  ADD_NEWUSER_MESSAGE,
+  CLEAR_NEWUSER_MESSAGE,
+} from '../actions/types';
 
 const initialState = {
   isFetching: false,
@@ -18,13 +24,23 @@ export default (state = initialState, action) => {
       return {
         isFetching: false,
         isCreated: true,
-        message: '',
+        message: 'A new user was created, please log in.',
       };
     case CREATE_FAILURE:
       return {
         isFetching: false,
         isCreated: false,
         message: action.message,
+      };
+    case ADD_NEWUSER_MESSAGE:
+      return {
+        ...state,
+        message: action.message,
+      };
+    case CLEAR_NEWUSER_MESSAGE:
+      return {
+        ...state,
+        message: '',
       };
     default:
       return state;
