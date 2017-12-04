@@ -14,22 +14,30 @@ const propTypes = {
   }).isRequired,
 };
 
+const pages = [
+  { key: 1, name: 'home', path: '/' },
+  { key: 2, name: 'about', path: '/about' },
+  { key: 3, name: 'page one', path: '/pageone' },
+  { key: 4, name: 'page two', path: '/pagetwo' },
+];
+
 class HeaderMenuComponent extends Component {
   state = { activeItem: 'home' };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isAuth !== this.props.isAuth) {
-      this.setState({ activeItem: 'home' });
-    }
+    if (nextProps.isAuth !== this.props.isAuth) this.setState({ activeItem: 'home' });
   }
 
   handleLogOut = () => {
     this.props.logOut();
     this.props.history.push('/login');
-  };
+  }
 
-  handleClick = (e, { name }) => {
-    if (this.props.isAuth) this.setState({ activeItem: name });
+  handleClick = (e, { name, path }) => {
+    if (this.props.isAuth) {
+      this.setState({ activeItem: name });
+      this.props.history.push(path);
+    }
   }
 
   render() {
@@ -38,21 +46,15 @@ class HeaderMenuComponent extends Component {
 
     return (
       <Menu secondary>
-        <Menu.Item
-          name="home"
-          active={isAuth && activeItem === 'home'}
-          onClick={this.handleClick}
-        />
-        <Menu.Item
-          name="page 1"
-          active={isAuth && activeItem === 'page 1'}
-          onClick={this.handleClick}
-        />
-        <Menu.Item
-          name="page 2"
-          active={isAuth && activeItem === 'page 2'}
-          onClick={this.handleClick}
-        />
+        {pages.map(page => (
+          <Menu.Item
+            key={page.key}
+            name={page.name}
+            path={page.path}
+            active={isAuth && activeItem === page.name}
+            onClick={this.handleClick}
+          />
+        ))}
         <Menu.Menu position="right">
           {
             !isAuth ?

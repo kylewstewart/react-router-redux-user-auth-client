@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 
-import Main from './Main';
-import Header from './containers/HeaderContainer';
+import Main from './MainRoutes';
+import Header from './header/HeaderContainer';
 
 
 const App = () => (
-  <Container>
+  <Container fluid={false} text>
     <Grid columns={1}>
       <Grid.Row />
       <Grid.Row>

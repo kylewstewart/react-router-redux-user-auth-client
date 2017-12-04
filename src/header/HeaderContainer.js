@@ -3,7 +3,7 @@ import { Container, Grid, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Menu from '../components/HeaderMenuComponent';
+import HeaderMenu from '../components/HeaderMenuComponent';
 import { logOut } from '../actions';
 
 const propTypes = {
@@ -30,7 +30,7 @@ const HeaderContainer = ({ isAuth, username }) => (
       </Grid.Row>
       <Grid.Row columns={1}>
         <Grid.Column width={16}>
-          <Menu />
+          <HeaderMenu />
         </Grid.Column>
       </Grid.Row>
     </Grid>
