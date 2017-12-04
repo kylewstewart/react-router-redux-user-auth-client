@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
       return {
         isFetching: false,
         isCreated: true,
-        message: 'A new user was created, please log in.',
+        message: '',
       };
     case CREATE_FAILURE:
       return {

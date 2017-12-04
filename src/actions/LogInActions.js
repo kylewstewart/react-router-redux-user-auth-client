@@ -51,3 +51,7 @@ export const addNewUserMessage = message => (dispatch) => {
 export const clearNewUserMessage = () => (dispatch) => {
   dispatch({ type: types.CLEAR_NEWUSER_MESSAGE });
 };
+
+export const setActiveItem = name => (dispatch) => {
+  dispatch({ type: types.SET_ACTIVE_ITEM, name });
+};

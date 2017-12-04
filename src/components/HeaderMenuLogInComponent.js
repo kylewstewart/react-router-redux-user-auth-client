@@ -3,25 +3,25 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Menu } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+import { setActiveItem } from '../actions';
 
 const propTypes = {
   isAuth: PropTypes.bool.isRequired,
+  activeItem: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  setActiveItem: PropTypes.func.isRequired,
 };
 
 class HeaderMenuLogInComponent extends Component {
-  state = { activeItem: 'log in' };
-
   handleClick = (e, { name, path }) => {
-    this.setState({ activeItem: name });
     this.props.history.push(path);
+    this.props.setActiveItem(name);
   }
 
   render() {
-    const { activeItem } = this.state;
-    const { isAuth } = this.props;
+    const { isAuth, activeItem } = this.props;
 
     return (
       <Menu secondary>
@@ -44,6 +44,8 @@ class HeaderMenuLogInComponent extends Component {
 
 HeaderMenuLogInComponent.propTypes = propTypes;
 
-const mapStateToProps = ({ auth }) => ({ isAuth: auth.isAuth });
+const mapStateToProps = ({ auth, activeItem }) => ({ isAuth: auth.isAuth, activeItem });
 
-export default withRouter(connect(mapStateToProps)(HeaderMenuLogInComponent));
+export default withRouter(connect(mapStateToProps, {
+  setActiveItem,
+})(HeaderMenuLogInComponent));

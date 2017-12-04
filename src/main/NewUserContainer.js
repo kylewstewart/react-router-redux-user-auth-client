@@ -7,13 +7,16 @@ import {
   createUser,
   failedPasswordConfirm,
   clearNewUserMessage,
-  
-
+  addLogInMessage,
+  setActiveItem,
 } from '../actions';
 
 const propTypes = {
   createUser: PropTypes.func.isRequired,
   failedPasswordConfirm: PropTypes.func.isRequired,
+  clearNewUserMessage: PropTypes.func.isRequired,
+  addLogInMessage: PropTypes.func.isRequired,
+  setActiveItem: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isCreated: PropTypes.bool.isRequired,
   history: PropTypes.shape({
@@ -31,12 +34,18 @@ class NewUserContainer extends Component {
 
   handleChange= (e, { name, value }) => this.setState({ [name]: value });
 
-  handleClick = () => {
+  handleClick = async () => {
     const { username, password, confirmPassword } = this.state;
 
     if (password === confirmPassword) {
       const newUser = { username, password };
-      this.props.createUser(newUser);
+      await this.props.createUser(newUser);
+      if (this.props.isCreated) {
+        this.props.clearNewUserMessage();
+        this.props.addLogInMessage('New user added, please log in.');
+        this.props.setActiveItem('log in');
+        this.props.history.push('/login');
+      }
     } else {
       this.props.failedPasswordConfirm();
     }
@@ -93,6 +102,7 @@ const mapStateToProps = ({ newUser }) => (
 export default withRouter(connect(mapStateToProps, {
   createUser,
   failedPasswordConfirm,
-  clearLogInMessage,
-  addNewUserMessage,
+  clearNewUserMessage,
+  addLogInMessage,
+  setActiveItem,
 })(NewUserContainer));
