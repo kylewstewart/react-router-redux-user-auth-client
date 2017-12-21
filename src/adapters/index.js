@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000/api/v1';
+const baseURL = 'http://127.0.0.1:5000/api/v1';
 
 const headers = () => ({
   'content-type': 'application/json',
@@ -12,6 +12,7 @@ export const auth = (username, password) => (
     headers: headers(),
     body: JSON.stringify({ username, password }),
   }).then(response => response.json())
+
 );
 
 export const currentUser = () => (
@@ -20,10 +21,10 @@ export const currentUser = () => (
   }).then(response => response.json())
 );
 
-export const createUser = newUser => (
+export const createUser = ({ username, password }) => (
   fetch(`${baseURL}/user`, {
     method: 'post',
     headers: headers(),
-    body: JSON.stringify({ newUser }),
+    body: JSON.stringify({ username, password }),
   }).then(response => response.json())
 );
